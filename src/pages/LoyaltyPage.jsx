@@ -4,12 +4,30 @@ import { useState } from "react"
 import { Search, SlidersHorizontal, Edit } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../components/ui/table"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../components/ui/table"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select"
 import { Badge } from "../components/ui/badge"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "../components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "../components/ui/dialog"
 
-// Sample data
 const promotions = [
   {
     id: 1,
@@ -54,32 +72,32 @@ export default function LoyaltyPage() {
   const [promoType, setPromoType] = useState("percentage")
 
   return (
-    <div className="container mx-auto p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Loyalty and promotions</h1>
-        <div className="flex items-center gap-2">
-          <div className="relative">
+    <div className="container mx-auto p-4 md:p-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <h1 className="text-2xl font-bold text-[#1c1c1c]">Loyalty and Promotions</h1>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <div className="relative w-full sm:w-auto">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-            <Input placeholder="Search Here..." className="pl-10 w-[250px] rounded-full" />
+            <Input placeholder="Search Here..." className="pl-10 rounded-full w-full sm:w-[250px]" />
           </div>
-          <Button variant="outline" className="rounded-full">
+          <Button variant="outline" className="rounded-full w-full sm:w-auto">
             <SlidersHorizontal size={18} className="mr-2" />
             Filters
           </Button>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <Table>
+      <div className="bg-white rounded-xl shadow overflow-x-auto">
+        <Table className="min-w-[800px]">
           <TableHeader>
-            <TableRow>
-              <TableHead className="bg-[#1c1c1c] text-white">Promo Code</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Type</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Value</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Valid Until</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Usage</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Status</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Actions</TableHead>
+            <TableRow className="bg-[#1c1c1c] text-white">
+              <TableHead className="text-white">Promo Code</TableHead>
+              <TableHead className="text-white">Type</TableHead>
+              <TableHead className="text-white">Value</TableHead>
+              <TableHead className="text-white">Valid Until</TableHead>
+              <TableHead className="text-white">Usage</TableHead>
+              <TableHead className="text-white">Status</TableHead>
+              <TableHead className="text-white">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -94,7 +112,9 @@ export default function LoyaltyPage() {
                   <Badge
                     variant={promo.status === "Active" ? "default" : "destructive"}
                     className={
-                      promo.status === "Active" ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"
+                      promo.status === "Active"
+                        ? "bg-green-500 hover:bg-green-600"
+                        : "bg-red-500 hover:bg-red-600"
                     }
                   >
                     {promo.status}
@@ -111,8 +131,8 @@ export default function LoyaltyPage() {
         </Table>
       </div>
 
-      <div className="mt-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold mb-6">Create New Promotion</h2>
+      <div className="mt-8 bg-white rounded-xl shadow p-6">
+        <h2 className="text-xl font-bold mb-6 text-[#1c1c1c]">Create New Promotion</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -122,7 +142,7 @@ export default function LoyaltyPage() {
                 <SelectValue placeholder="Select type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="percentage">Precentage Discount</SelectItem>
+                <SelectItem value="percentage">Percentage Discount</SelectItem>
                 <SelectItem value="fixed">Fixed Amount</SelectItem>
                 <SelectItem value="bogo">Buy One Get One</SelectItem>
               </SelectContent>
@@ -136,7 +156,7 @@ export default function LoyaltyPage() {
 
           <div>
             <label className="block mb-2 font-medium">Discount Value</label>
-            <Input placeholder="Enter Value" />
+            <Input placeholder="Enter value" />
           </div>
 
           <div>
@@ -150,8 +170,8 @@ export default function LoyaltyPage() {
           </div>
         </div>
 
-        <div className="mt-6 flex gap-2">
-          <Button className="bg-[#1c1c1c] hover:bg-[#333]">Save Promotion</Button>
+        <div className="mt-6 flex flex-col sm:flex-row gap-2">
+          <Button className="bg-[#1c1c1c] hover:bg-[#333] text-white">Save Promotion</Button>
           <Button variant="outline">Cancel</Button>
         </div>
       </div>

@@ -39,8 +39,6 @@ export default function Dashboard() {
         <div className="max-md:hidden">
         <Header/>
         </div>
-        
-        
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Popular Destinations</h2>
@@ -153,7 +151,6 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
-
     </div>
   )
 }

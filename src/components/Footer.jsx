@@ -2,22 +2,27 @@ import { Link } from "react-router-dom"
 import { Facebook, Instagram, PinIcon as Pinterest, Twitter } from "lucide-react"
 import Logo from "./Logo"
 
-function Footer() {
+export default function Footer() {
   return (
-    <footer className="bg-[#183957] text-white py-10">
+    <footer className="bg-[#183957] text-white py-8">
       <div className="container mx-auto px-4">
-        {/* Logo and copyright */}
-        <div className="mb-8">
-          <Logo/>
-          <p className="text-sm mt-2">Copyright © TravelZy 2025 All rights reserved</p>
+        {/* Top Section: Logo & Copyright */}
+        <div className="flex flex-col items-center text-center">
+          <Logo />
+          <p className="text-xs mt-2">
+            © 2025 TravelZy. All rights reserved.
+          </p>
         </div>
 
-        {/* Grid with Menu, Information, and Contact */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Menu Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Menu</h3>
-            <ul className="space-y-2">
+        {/* Horizontal separator */}
+        <hr className="my-6 border-white/20" />
+
+        {/* Bottom Section: Three Columns on Desktop, Stacked on Mobile */}
+        <div className="flex flex-col md:flex-row gap-8 md:gap-0 text-center md:text-left">
+          {/* Column 1: Menu */}
+          <div className="flex-1 mb-6 md:mb-0">
+            <h3 className="text-lg font-bold mb-3">Menu</h3>
+            <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/" className="hover:text-[#ff7757]">
                   Home
@@ -46,10 +51,10 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Information Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Information</h3>
-            <ul className="space-y-2">
+          {/* Column 2: Information */}
+          <div className="flex-1 mb-6 md:mb-0">
+            <h3 className="text-lg font-bold mb-3">Information</h3>
+            <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/destinations" className="hover:text-[#ff7757]">
                   Destinations
@@ -73,17 +78,17 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info & Social Media Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Contact Info</h3>
-            <ul className="space-y-2">
+          {/* Column 3: Contact & Socials */}
+          <div className="flex-1">
+            <h3 className="text-lg font-bold mb-3">Contact Info</h3>
+            <ul className="space-y-2 text-sm mb-4">
               <li>+123 456 789</li>
               <li>info@travelzy.com</li>
               <li>ESI, Oued Samar, Algiers</li>
             </ul>
 
-            <h3 className="text-lg font-bold mt-6 mb-4">Follow us on</h3>
-            <div className="flex gap-4">
+            <h3 className="text-lg font-bold mb-3">Follow us on</h3>
+            <div className="flex justify-center md:justify-start gap-4">
               <Link to="#" className="hover:text-[#ff7757]">
                 <Facebook size={20} />
               </Link>
@@ -103,5 +108,3 @@ function Footer() {
     </footer>
   )
 }
-
-export default Footer

@@ -7,6 +7,8 @@ import HotelListings from "./pages/HotelListings"
 import PaymentPage from "./pages/PaymentPage"
 import ReservationHistory from "./pages/ReservationHistory"
 import ProfilePage from "./pages/ProfilePage"
+import Sidebar from "./components/Sidebar"
+import Footer from "./components/Footer"
 
 
 function App() {
@@ -17,11 +19,17 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="loyalty" element={<LoyaltyPage />} />
-            <Route path="hotels" element={<HotelListings />} />
-            <Route path="payment" element={<PaymentPage />} />
-            <Route path="reservations" element={<ReservationHistory />} />
-            <Route path="profile" element={<ProfilePage />} />
           </Route>
+          <Route element={<Sidebar />}>
+            <Route path="/hotels" element={<HotelListings />} />
+          </Route>
+          <Route path="/payment" element={<PaymentPage />}>
+            <Route  index element={<Footer />} />
+          </Route>
+            {/* <Route path="/payment" element={<PaymentPage />} /> */}
+          <Route path="/reservations" element={<ReservationHistory />} />
+          <Route path="/profile" element={<ProfilePage />} />
+
         </Routes>
       </Router>
     </ThemeProvider>

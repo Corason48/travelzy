@@ -15,7 +15,7 @@ export default function Layout() {
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-1">
         {/* Desktop Sidebar */}
-        <div className="hidden md:flex flex-col w-[200px] bg-[#1c1c1c] text-white">
+        <div className="hidden md:flex flex-col w-[200px] bg-[#172432] text-white">
           <div className="flex flex-col items-center p-6">
             <div className="h-24 w-24 mt-6 border-2 border-white rounded-full bg-gray-300 flex items-center justify-center">
               MN

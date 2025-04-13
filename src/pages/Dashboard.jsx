@@ -181,7 +181,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <footer className="mt-12 bg-[#1c1c1c] text-white p-8 rounded-lg">
+      <footer className="mt-12 bg-[#172432] text-white p-8 rounded-lg">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">Menu</h3>

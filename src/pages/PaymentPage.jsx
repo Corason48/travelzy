@@ -168,7 +168,7 @@ export default function PaymentPage() {
         </div>
 
         <div className="pt-6">
-          <Button className="w-full bg-[#1c1c1c] hover:bg-[#333] py-6">Pay</Button>
+          <Button className="w-full bg-[#172432] hover:bg-[#333] py-6">Pay</Button>
         </div>
       </div>
     </div>

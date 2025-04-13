@@ -73,13 +73,13 @@ export default function LoyaltyPage() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="bg-[#1c1c1c] text-white">Promo Code</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Type</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Value</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Valid Until</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Usage</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Status</TableHead>
-              <TableHead className="bg-[#1c1c1c] text-white">Actions</TableHead>
+              <TableHead className="bg-[#172432] text-white">Promo Code</TableHead>
+              <TableHead className="bg-[#172432] text-white">Type</TableHead>
+              <TableHead className="bg-[#172432] text-white">Value</TableHead>
+              <TableHead className="bg-[#172432] text-white">Valid Until</TableHead>
+              <TableHead className="bg-[#172432] text-white">Usage</TableHead>
+              <TableHead className="bg-[#172432] text-white">Status</TableHead>
+              <TableHead className="bg-[#172432] text-white">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -151,7 +151,7 @@ export default function LoyaltyPage() {
         </div>
 
         <div className="mt-6 flex gap-2">
-          <Button className="bg-[#1c1c1c] hover:bg-[#333]">Save Promotion</Button>
+          <Button className="bg-[#172432] hover:bg-[#333]">Save Promotion</Button>
           <Button variant="outline">Cancel</Button>
         </div>
       </div>

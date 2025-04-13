@@ -1,32 +1,31 @@
 import { useState } from "react"
 import { Outlet, Link, useLocation } from "react-router-dom"
-import { Package, Home, Users, BarChart3, LogOut, Menu, Bell } from 'lucide-react'
+import { Package, Home, Users, BarChart3, LogOut, Menu, Bell, DollarSignIcon } from "lucide-react"
 import Footer from "./Footer"
+import Logo from "./Logo"
 
 export default function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
 
-  const isActive = (path) => {
-    return location.pathname === path
-  }
+  const isActive = (path) => location.pathname === path
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#f7f7f7]">
       <div className="flex flex-1">
         {/* Desktop Sidebar */}
-        <div className="hidden md:flex flex-col w-[200px] bg-[#172432] text-white">
-          <div className="flex flex-col items-center p-6">
+        <div className="hidden md:flex flex-col w-[220px] bg-[#183957] text-white shadow-lg">
+          <div className="flex flex-col items-center p-6 border-b border-gray-700">
             <div className="h-24 w-24 mt-6 border-2 border-white rounded-full bg-gray-300 flex items-center justify-center">
               MN
             </div>
             <div className="mt-2 text-center">
-              <h3 className="font-medium">Manager Name</h3>
+              <h3 className="font-semibold">Manager Name</h3>
             </div>
           </div>
 
           <nav className="flex-1 mt-6">
-            <ul className="space-y-1 px-2">
+            <ul className="space-y-2 px-2">
               <li>
                 <Link
                   to="/"
@@ -51,13 +50,13 @@ export default function Layout() {
               </li>
               <li>
                 <Link
-                  to="/clients"
+                  to="/profile"
                   className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
-                    isActive("/clients") ? "bg-white/10" : "hover:bg-white/5"
+                    isActive("/profile") ? "bg-white/10" : "hover:bg-white/5"
                   }`}
                 >
                   <Users size={20} />
-                  <span>Clients</span>
+                  <span>Home</span>
                 </Link>
               </li>
               <li>
@@ -73,22 +72,22 @@ export default function Layout() {
               </li>
               <li>
                 <Link
-                  to="/statistics"
+                  to="/payment"
                   className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
-                    isActive("/statistics") ? "bg-white/10" : "hover:bg-white/5"
+                    isActive("/payment") ? "bg-white/10" : "hover:bg-white/5"
                   }`}
                 >
-                  <BarChart3 size={20} />
-                  <span>Statistics</span>
+                  <DollarSignIcon size={20} />
+                  <span>Payment</span>
                 </Link>
               </li>
             </ul>
           </nav>
 
-          <div className="p-4 mt-auto">
+          <div className="p-4 mt-auto border-t border-gray-700">
             <Link
               to="/logout"
-              className="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-white/5 transition-colors"
+              className="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-white/10 transition-colors"
             >
               <LogOut size={20} />
               <span>Log Out</span>
@@ -98,14 +97,14 @@ export default function Layout() {
 
         {/* Mobile Header and Main Content */}
         <div className="flex flex-col flex-1">
-          <header className="flex items-center justify-between p-4 border-b md:hidden">
-            <button 
+          <header className="flex items-center justify-between p-4 border-b bg-white md:hidden">
+            <button
               className="p-2 rounded-md hover:bg-gray-100"
               onClick={() => setIsMobileMenuOpen(true)}
             >
               <Menu size={24} />
             </button>
-            <div className="text-xl font-bold">TravelZy</div>
+            <Logo/>
             <button className="p-2 rounded-md hover:bg-gray-100">
               <Bell size={24} />
             </button>
@@ -114,10 +113,10 @@ export default function Layout() {
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
             <div className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden">
-              <div className="bg-white h-full w-[280px] p-4">
+              <div className="bg-white h-full w-[280px] p-4 shadow-md">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-bold">Menu</h2>
-                  <button 
+                  <h2 className="text-xl font-bold text-[#183957]">Menu</h2>
+                  <button
                     className="p-2 rounded-md hover:bg-gray-100"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -127,30 +126,39 @@ export default function Layout() {
                 <nav>
                   <ul className="space-y-4">
                     <li>
-                      <Link 
-                        to="/" 
-                        className="block py-2 hover:text-blue-500"
+                      <Link
+                        to="/"
+                        className="block py-2 text-[#183957] hover:text-blue-500"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         Home
                       </Link>
                     </li>
                     <li>
-                      <Link 
-                        to="/reservations" 
-                        className="block py-2 hover:text-blue-500"
+                      <Link
+                        to="/reservations"
+                        className="block py-2 text-[#183957] hover:text-blue-500"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         Reservations
                       </Link>
                     </li>
                     <li>
-                      <Link 
-                        to="/loyalty" 
-                        className="block py-2 hover:text-blue-500"
+                      <Link
+                        to="/loyalty"
+                        className="block py-2 text-[#183957] hover:text-blue-500"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         Loyalty
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/payment"
+                        className="block py-2 text-[#183957] hover:text-blue-500"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Payment
                       </Link>
                     </li>
                   </ul>
@@ -160,7 +168,7 @@ export default function Layout() {
           )}
 
           {/* Main Content */}
-          <main className="flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto p-4 bg-white">
             <Outlet />
           </main>
         </div>

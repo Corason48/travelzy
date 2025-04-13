@@ -9,6 +9,7 @@ import { Checkbox } from "../components/ui/checkbox"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
 import { Card } from "../components/ui/card"
+import Header from "@/components/Header"
 
 // Sample data
 const hotels = [
@@ -65,7 +66,10 @@ export default function HotelListings() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="max-md:hidden">
+      <Header/>
+      </div>
+      <div className="flex flex-col md:flex-row gap-6 space-y-5">
         {/* Desktop Filters */}
         <div className="hidden md:block w-64 space-y-6">
           <h2 className="text-xl font-bold">Filters</h2>

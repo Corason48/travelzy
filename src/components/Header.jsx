@@ -47,7 +47,7 @@ export default function Header() {
 
         {/* Mobile Menu Button (Visible on mobile only) */}
         <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={onMenuToggle} className="p-2">
+          <Button variant="ghost" size="icon" className="p-2">
             <Menu className="h-6 w-6 text-gray-600" />
             <span className="sr-only">Toggle menu</span>
           </Button>

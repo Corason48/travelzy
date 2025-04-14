@@ -7,6 +7,9 @@ import HotelListings from "./pages/HotelListings"
 import PaymentPage from "./pages/PaymentPage"
 import ReservationHistory from "./pages/ReservationHistory"
 import ProfilePage from "./pages/ProfilePage"
+import PaymentConfirmationPage from "./pages/PaymentConfirmationPage"
+import PaymentSuccessPage from "./pages/PaymentSuccessPage"
+import CreateOfferPage from "./pages/CreateOfferPage"
 
 
 function App() {
@@ -19,9 +22,14 @@ function App() {
             <Route path="loyalty" element={<LoyaltyPage />} />
             <Route path="hotels" element={<HotelListings />} />
             <Route path="payment" element={<PaymentPage />} />
+            <Route path="payment-confirmation" element={<PaymentConfirmationPage />} />
+            <Route path="payment-success" element={<PaymentSuccessPage />} />
             <Route path="reservations" element={<ReservationHistory />} />
             <Route path="profile" element={<ProfilePage />} />
+            <Route path="create-offer" element={<CreateOfferPage />} />
           </Route>
+          
+          
         </Routes>
       </Router>
     </ThemeProvider>

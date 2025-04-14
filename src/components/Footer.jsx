@@ -1,8 +1,20 @@
-import { Link } from "react-router-dom"
+import { Link, Outlet, useLocation } from "react-router-dom"
 import { Facebook, Instagram, PinIcon as Pinterest, Twitter } from "lucide-react"
 import Logo from "./Logo"
 
 function Footer() {
+  const location = useLocation()
+  
+
+if (
+  location.pathname.includes("reservations") ||
+  location.pathname.includes("profile")||
+  location.pathname.includes("payment-confirmation") ||
+  location.pathname.includes("payment-success")||
+  location.pathname.includes("create-offer")
+) {
+  return null
+}
   return (
     <footer className="bg-[#183957] text-white py-10">
       <div className="container mx-auto px-4">

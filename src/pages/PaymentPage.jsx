@@ -72,7 +72,7 @@ export default function PaymentPage() {
   })
 
   return (
-    <div className="container mx-auto p-4 max-w-4xl">
+    <div className="container mx-auto p-4 max-w-6xl">
       <Header/>
       <h1 className="text-2xl font-bold text-primary mb-6">Credit Card Details</h1>
 

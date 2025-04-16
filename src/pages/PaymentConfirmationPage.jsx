@@ -1,21 +1,19 @@
 "use client"
 
 import { useState } from "react"
-import { Info, CreditCard } from "lucide-react"
+import { Info, CreditCard, FileText } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Link, useNavigate } from "react-router-dom"
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import Logo from "@/components/Logo"
 
 export default function PaymentConfirmationPage() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     fullName: "",
-    cardNumber: "",
+    cardNumber: "1234",
     ccv: "",
-    expirationMonth: "",
-    expirationYear: "",
+    expirationDate: "",
   })
 
   const handleChange = (e) => {
@@ -33,139 +31,143 @@ export default function PaymentConfirmationPage() {
   // Sample reservation data
   const reservationData = {
     reservationNumber: "11458523",
-    discount: "20%",
+    discount: "%20",
     offerPrice: "$123.28",
     totalAmount: "$576.32",
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <Card className="overflow-hidden shadow-xl">
-          <CardHeader className="bg-white border-b flex flex-col items-center">
-            <div className="mb-4 text-center">
-              <Logo/>
+    <div
+      className="min-h-screen bg-gray-100 flex items-center justify-center p-4"
+      style={{
+        backgroundImage: "url('/placeholder.svg?height=800&width=1200')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="max-w-5xl w-full bg-white rounded-2xl shadow-lg overflow-hidden">
+        {/* Logo */}
+        <div className="text-center py-8">
+          <Link to="/" className="inline-block">
+            <Logo/>
+          </Link>
+        </div>
+
+        <div className="flex flex-col md:flex-row">
+          {/* Payment Form */}
+          <div className="p-8 md:w-2/3">
+            <div className="flex items-center mb-6">
+              <div className="bg-[#e66a5e] p-2 rounded-md mr-3">
+                <CreditCard className="text-white" size={20} />
+              </div>
+              <h2 className="text-xl font-semibold">Card</h2>
             </div>
-            <div className="flex items-center self-start">
-              <CreditCard className="mr-2 text-[#e66a5e]" />
-              <CardTitle>Card</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="md:flex">
-              <div className="p-6 md:w-2/3 border-b md:border-b-0 md:border-r">
-                <p className="mb-6 text-gray-600">Please review your information and confirm the payment.</p>
 
-                <form onSubmit={handleSubmit}>
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block mb-2 font-medium">Your Full Name</label>
-                      <div className="relative">
-                        <Input
-                          name="fullName"
-                          value={formData.fullName}
-                          onChange={handleChange}
-                          placeholder="Enter your full name"
-                        />
-                        <Info className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                      </div>
-                    </div>
+            <p className="text-gray-600 mb-8">Please review your information and confirm the payment.</p>
 
-                    <div>
-                      <label className="block mb-2 font-medium">Card Number</label>
-                      <Input
-                        name="cardNumber"
-                        value={formData.cardNumber}
-                        onChange={handleChange}
-                        placeholder="1234 - - - - - - - - - - -"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block mb-2 font-medium">CCV</label>
-                        <Input name="ccv" value={formData.ccv} onChange={handleChange} placeholder="- - -" />
-                      </div>
-
-                      <div>
-                        <label className="block mb-2 font-medium">Expiration Date</label>
-                        <Input
-                          name="expirationDate"
-                          value={formData.expirationDate}
-                          onChange={handleChange}
-                          placeholder="MM / YY"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4 pt-4">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        className="flex-1 bg-[#e66a5e] text-white hover:bg-[#d55d51] border-[#e66a5e]"
-                        onClick={() => navigate(-1)}
-                      >
-                        Cancel
-                      </Button>
-                      <Button type="submit" className="flex-1 bg-[#183957] hover:bg-[#122c43]">
-                        Confirm
-                      </Button>
-                    </div>
-                  </div>
-                </form>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="flex items-center mb-2 font-medium">
+                  Your Full Name
+                  <Info className="ml-2 text-gray-400" size={16} />
+                </label>
+                <Input name="fullName" value={formData.fullName} onChange={handleChange} className="h-12 rounded-md" />
               </div>
 
-              <div className="p-6 md:w-1/3 bg-[#f5f5f5]">
-                <h3 className="text-xl font-bold mb-6">Ödeme Özeti</h3>
+              <div>
+                <label className="flex items-center mb-2 font-medium">
+                  Card Number
+                  <Info className="ml-2 text-gray-400" size={16} />
+                </label>
+                <Input
+                  name="cardNumber"
+                  value={formData.cardNumber}
+                  onChange={handleChange}
+                  placeholder="1234 - - - - - - - - - - -"
+                  className="h-12 rounded-md bg-[#fff5f3] text-lg"
+                />
+              </div>
 
-                <div className="space-y-4">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Reservation Number</span>
-                    <span className="font-medium">{reservationData.reservationNumber}</span>
-                  </div>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="flex items-center mb-2 font-medium">
+                    CCV
+                    <Info className="ml-2 text-gray-400" size={16} />
+                  </label>
+                  <Input
+                    name="ccv"
+                    value={formData.ccv}
+                    onChange={handleChange}
+                    placeholder="- - -"
+                    className="h-12 rounded-md"
+                  />
+                </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Discount</span>
-                    <span className="font-medium">{reservationData.discount}</span>
-                  </div>
+                <div>
+                  <label className="flex items-center mb-2 font-medium">
+                    Expiration Date
+                    <Info className="ml-2 text-gray-400" size={16} />
+                  </label>
+                  <Input
+                    name="expirationDate"
+                    value={formData.expirationDate}
+                    onChange={handleChange}
+                    placeholder="MM / YY"
+                    className="h-12 rounded-md"
+                  />
+                </div>
+              </div>
 
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Offer Price</span>
-                    <span className="font-medium">{reservationData.offerPrice}</span>
-                  </div>
+              <div className="flex gap-4 pt-6">
+                <Button type="submit" className="flex-1 h-12 bg-[#183957] hover:bg-[#122c43] rounded-md">
+                  Confirm
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex-1 h-12 bg-[#e66a5e] text-white hover:bg-[#d55d51] border-[#e66a5e] rounded-md"
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </form>
+          </div>
 
-                  <div className="border-t border-dashed border-gray-300 my-4"></div>
+          {/* Payment Summary */}
+          <div className="bg-[#f5f9ff] p-8 md:w-1/3">
+            <h3 className="text-xl font-bold mb-8">Ödeme Özeti</h3>
 
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <span className="text-gray-600">Total Amount Payable</span>
-                      <div className="text-2xl font-bold">{reservationData.totalAmount}</div>
-                    </div>
-                    <div className="text-[#183957]">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                      </svg>
-                    </div>
-                  </div>
+            <div className="space-y-4">
+              <div className="flex justify-between">
+                <span className="text-gray-600">Reservation Number</span>
+                <span className="font-medium">{reservationData.reservationNumber}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span className="text-gray-600">Discount</span>
+                <span className="font-medium">{reservationData.discount}</span>
+              </div>
+
+              <div className="flex justify-between">
+                <span className="text-gray-600">Offer Price</span>
+                <span className="font-medium">{reservationData.offerPrice}</span>
+              </div>
+
+              <div className="border-t border-dashed border-gray-300 my-8"></div>
+
+              <div className="flex justify-between items-center">
+                <div>
+                  <span className="text-gray-600">Total Amount Payable</span>
+                  <div className="text-2xl font-bold">{reservationData.totalAmount}</div>
+                </div>
+                <div className="text-[#183957]">
+                  <FileText size={24} />
                 </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   )

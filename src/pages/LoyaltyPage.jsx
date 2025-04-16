@@ -90,7 +90,7 @@ export default function LoyaltyPage() {
       <div className="bg-white rounded-xl shadow overflow-x-auto">
         <Table className="min-w-[800px]">
           <TableHeader>
-            <TableRow className="bg-[#1c1c1c] text-white">
+            <TableRow className="bg-[#1c1c1c] hover:bg-[#1c1c1c] text-white">
               <TableHead className="text-white">Promo Code</TableHead>
               <TableHead className="text-white">Type</TableHead>
               <TableHead className="text-white">Value</TableHead>

@@ -41,15 +41,12 @@ export default function PaymentConfirmationPage() {
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-6 text-center">
-          <Link to="/" className="inline-block">
-           <Logo/>
-          </Link>
-        </div>
-
-        <Card className="overflow-hidden max-w-7xl shadow-xl">
-          <CardHeader className="bg-white border-b">
-            <div className="flex items-center">
+        <Card className="overflow-hidden shadow-xl">
+          <CardHeader className="bg-white border-b flex flex-col items-center">
+            <div className="mb-4 text-center">
+              <Logo/>
+            </div>
+            <div className="flex items-center self-start">
               <CreditCard className="mr-2 text-[#e66a5e]" />
               <CardTitle>Card</CardTitle>
             </div>

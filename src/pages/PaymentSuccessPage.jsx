@@ -6,7 +6,7 @@ import Logo from "@/components/Logo"
 export default function PaymentSuccessPage() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-sm p-8 text-center">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8 text-center">
         <div className="mb-6">
           <Link to="/" className="inline-block">
              <Logo/>

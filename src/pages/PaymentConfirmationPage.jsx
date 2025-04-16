@@ -47,7 +47,7 @@ export default function PaymentConfirmationPage() {
           </Link>
         </div>
 
-        <Card className="overflow-hidden max-w-7xl">
+        <Card className="overflow-hidden max-w-7xl shadow-xl">
           <CardHeader className="bg-white border-b">
             <div className="flex items-center">
               <CreditCard className="mr-2 text-[#e66a5e]" />

@@ -11,6 +11,7 @@ if (
   location.pathname.includes("profile")||
   location.pathname.includes("payment-confirmation") ||
   location.pathname.includes("payment-success")||
+  location.pathname.includes("loyalty")||
   location.pathname.includes("create-offer")
 ) {
   return null

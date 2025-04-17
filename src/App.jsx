@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage"
 import PaymentConfirmationPage from "./pages/PaymentConfirmationPage"
 import PaymentSuccessPage from "./pages/PaymentSuccessPage"
 import CreateOfferPage from "./pages/CreateOfferPage"
+import Offers from "./pages/Offers"
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="loyalty" element={<LoyaltyPage />} />
+            <Route path="offers" element={<Offers />} />
             <Route path="hotels" element={<HotelListings />} />
             <Route path="payment" element={<PaymentPage />} />
             <Route path="payment-confirmation" element={<PaymentConfirmationPage />} />

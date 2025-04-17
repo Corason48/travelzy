@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react"
 import { Outlet, Link, useLocation } from "react-router-dom"
-import { Package, Home, Users, BarChart3, LogOut, Menu, Bell, DollarSignIcon } from "lucide-react"
+import { Package, Home, Users, BarChart3, LogOut, Menu, Bell, DollarSignIcon, Plane } from "lucide-react"
 import Logo from "./Logo"
 const Sidebar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -42,6 +42,17 @@ const Sidebar = () => {
               }`}
             >
               <Home size={20} />
+              <span>Home</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/offers"
+              className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
+                isActive("/offers") ? "bg-white/10" : "hover:bg-white/5"
+              }`}
+            >
+              <Plane size={20} />
               <span>Offres</span>
             </Link>
           </li>
@@ -64,7 +75,7 @@ const Sidebar = () => {
               }`}
             >
               <Users size={20} />
-              <span>Home</span>
+              <span>Profile</span>
             </Link>
           </li>
           <li>
@@ -140,6 +151,24 @@ const Sidebar = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/offers"
+                    className="block py-2 text-[#183957] hover:text-blue-500"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Offers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/profile"
+                    className="block py-2 text-[#183957] hover:text-blue-500"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Profile
                   </Link>
                 </li>
                 <li>

@@ -11,6 +11,7 @@ import PaymentConfirmationPage from "./pages/PaymentConfirmationPage"
 import PaymentSuccessPage from "./pages/PaymentSuccessPage"
 import CreateOfferPage from "./pages/CreateOfferPage"
 import Offers from "./pages/Offers"
+import NotFoundPage from "./pages/NotFoundPage"
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="create-offer" element={<CreateOfferPage />} />
           </Route>
-          
+          <Route path="*" element={<NotFoundPage />} />
           
         </Routes>
       </Router>

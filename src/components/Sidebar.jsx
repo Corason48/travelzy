@@ -15,6 +15,7 @@ const Sidebar = () => {
     location.pathname.includes("payment")||
     location.pathname.includes("hotels")||
     location.pathname.includes("payment-confirmation")||
+    location.pathname.includes("destination")||
     location.pathname.includes("payment-success")
   ) {
     return <Outlet/>

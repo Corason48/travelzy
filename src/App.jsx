@@ -12,6 +12,10 @@ import PaymentSuccessPage from "./pages/PaymentSuccessPage"
 import CreateOfferPage from "./pages/CreateOfferPage"
 import Offers from "./pages/Offers"
 import NotFoundPage from "./pages/NotFoundPage"
+import StatisticsPage from "./pages/StatisticsPage"
+import DestinationDetailsPage from "./pages/DestinationDetailsPage"
+import 'leaflet/dist/leaflet.css';
+
 
 
 function App() {
@@ -30,6 +34,10 @@ function App() {
             <Route path="reservations" element={<ReservationHistory />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="create-offer" element={<CreateOfferPage />} />
+            <Route path="statistics" element={<StatisticsPage />} />
+            <Route path="destination/:id" element={<DestinationDetailsPage />} />
+
+
           </Route>
           <Route path="*" element={<NotFoundPage />} />
           

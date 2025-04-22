@@ -1,22 +1,26 @@
 "use client"
 
-import { useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { HelpCircle } from "lucide-react"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { Input } from "../components/ui/input"
+import { Label } from "../components/ui/label"
+import { Button } from "../components/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
+import { HelpCircle, Loader2 } from "lucide-react"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../components/ui/tooltip"
 import PaymentMethodIcons from "../components/payment-method-icons"
-import Header from "@/components/Header"
+import Header from "../components/Header"
+import { usePayment } from "../context/PaymentContext"
+
+import { useToast } from "../hooks/use-toast"
+import { paymentService } from "@/services/PaymentService"
 
 export default function PaymentPage() {
+  const navigate = useNavigate()
+  const { paymentState, updatePaymentDetails, updateReservationDetails, setPaymentStatus } = usePayment()
+  const { toast } = useToast()
+  const [isLoading, setIsLoading] = useState(false)
+
   const [formData, setFormData] = useState({
     name: "",
     cardNumber: "",
@@ -31,6 +35,34 @@ export default function PaymentPage() {
     email: "",
     phone: "",
   })
+
+  // Load reservation details on component mount
+  useEffect(() => {
+    const fetchReservationDetails = async () => {
+      try {
+        setIsLoading(true)
+        // In the future, this would get the reservation ID from URL params or state
+        const reservationId = new URLSearchParams(window.location.search).get("reservationId") || null
+
+        // Get reservation details from API
+        const details = await paymentService.getReservationDetails(reservationId)
+
+        // Update context with reservation details
+        updateReservationDetails(details)
+        setIsLoading(false)
+      } catch (error) {
+        console.error("Failed to load reservation details:", error)
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to load reservation details. Please try again.",
+        })
+        setIsLoading(false)
+      }
+    }
+
+    fetchReservationDetails()
+  }, [updateReservationDetails, toast])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -54,8 +86,30 @@ export default function PaymentPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Add your submission logic here
+
+    // Basic validation
+    if (!formData.name || !formData.cardNumber || !formData.month || !formData.year || !formData.cvv) {
+      toast({
+        variant: "destructive",
+        title: "Invalid Information",
+        description: "Please fill in all required payment fields.",
+      })
+      return
+    }
+
+    // Update payment details in context
+    updatePaymentDetails({
+      fullName: formData.name,
+      cardNumber: formData.cardNumber,
+      ccv: formData.cvv,
+      expirationDate: `${formData.month}/${formData.year}`,
+    })
+
+    // Reset payment status to idle before navigating
+    setPaymentStatus("idle")
+
+    // Navigate to confirmation page
+    navigate("/payment-confirmation")
   }
 
   // Generate month options
@@ -71,10 +125,21 @@ export default function PaymentPage() {
     return { value: year.toString(), label: year.toString() }
   })
 
+  // if (isLoading) {
+  //   return (
+  //     <div className="container mx-auto p-4 max-w-4xl flex items-center justify-center min-h-[60vh]">
+  //       <div className="text-center">
+  //         <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-[#1c1c1c]" />
+  //         <p>Loading payment information...</p>
+  //       </div>
+  //     </div>
+  //   )
+  // }
+
   return (
     <div className="container mx-auto p-4 max-w-6xl">
-      <Header/>
-      <h1 className="text-2xl font-bold text-primary mb-6">Credit Card Details</h1>
+      <Header />
+      <h1 className="text-2xl font-bold text-[#183957] mb-6">Credit Card Details</h1>
 
       {/* Payment Method Icons */}
       <div className="mb-6">
@@ -114,10 +179,7 @@ export default function PaymentPage() {
           <div className="space-y-2">
             <Label>Card Expiration</Label>
             <div className="grid grid-cols-2 gap-4">
-              <Select
-                value={formData.month}
-                onValueChange={(value) => handleSelectChange("month", value)}
-              >
+              <Select value={formData.month} onValueChange={(value) => handleSelectChange("month", value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Month" />
                 </SelectTrigger>
@@ -130,10 +192,7 @@ export default function PaymentPage() {
                 </SelectContent>
               </Select>
 
-              <Select
-                value={formData.year}
-                onValueChange={(value) => handleSelectChange("year", value)}
-              >
+              <Select value={formData.year} onValueChange={(value) => handleSelectChange("year", value)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Year" />
                 </SelectTrigger>
@@ -179,16 +238,13 @@ export default function PaymentPage() {
 
           {/* Section Heading: Billing Address */}
           <div className="col-span-1 md:col-span-2 mt-4">
-            <h2 className="text-xl font-bold text-primary mb-4">Billing Address</h2>
+            <h2 className="text-xl font-bold text-[#183957] mb-4">Billing Address</h2>
           </div>
 
           {/* Country */}
           <div className="space-y-2">
             <Label htmlFor="country">Country</Label>
-            <Select
-              value={formData.country}
-              onValueChange={(value) => handleSelectChange("country", value)}
-            >
+            <Select value={formData.country} onValueChange={(value) => handleSelectChange("country", value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Country" />
               </SelectTrigger>
@@ -206,37 +262,19 @@ export default function PaymentPage() {
           {/* Address */}
           <div className="space-y-2">
             <Label htmlFor="address">Address</Label>
-            <Input
-              id="address"
-              name="address"
-              placeholder="Address"
-              value={formData.address}
-              onChange={handleChange}
-            />
+            <Input id="address" name="address" placeholder="Address" value={formData.address} onChange={handleChange} />
           </div>
 
           {/* City */}
           <div className="space-y-2">
             <Label htmlFor="city">City</Label>
-            <Input
-              id="city"
-              name="city"
-              placeholder="City"
-              value={formData.city}
-              onChange={handleChange}
-            />
+            <Input id="city" name="city" placeholder="City" value={formData.city} onChange={handleChange} />
           </div>
 
           {/* State */}
           <div className="space-y-2">
             <Label htmlFor="state">State</Label>
-            <Input
-              id="state"
-              name="state"
-              placeholder="State"
-              value={formData.state}
-              onChange={handleChange}
-            />
+            <Input id="state" name="state" placeholder="State" value={formData.state} onChange={handleChange} />
           </div>
 
           {/* ZIP Code */}
@@ -253,7 +291,7 @@ export default function PaymentPage() {
 
           {/* Section Heading: Contact Information */}
           <div className="col-span-1 md:col-span-2 mt-4">
-            <h2 className="text-xl font-bold text-primary mb-4">Contact Information</h2>
+            <h2 className="text-xl font-bold text-[#183957] mb-4">Contact Information</h2>
           </div>
 
           {/* Email */}
@@ -272,21 +310,12 @@ export default function PaymentPage() {
           {/* Phone */}
           <div className="space-y-2">
             <Label htmlFor="phone">Phone</Label>
-            <Input
-              id="phone"
-              name="phone"
-              placeholder="Phone"
-              value={formData.phone}
-              onChange={handleChange}
-            />
+            <Input id="phone" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} />
           </div>
         </div>
 
         {/* Submit Button */}
-        <Button
-          type="submit"
-          className="w-full mt-8 bg-[#183957] hover:bg-[#183957]/90 text-white py-4"
-        >
+        <Button type="submit" className="w-full mt-8 bg-[#183957] hover:bg-[#183957]/90 text-white py-4">
           {typeof window !== "undefined" && window.innerWidth < 768 ? "Continue" : "Pay"}
         </Button>
       </form>

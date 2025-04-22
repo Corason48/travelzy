@@ -15,6 +15,8 @@ import NotFoundPage from "./pages/NotFoundPage"
 import StatisticsPage from "./pages/StatisticsPage"
 import DestinationDetailsPage from "./pages/DestinationDetailsPage"
 import 'leaflet/dist/leaflet.css';
+import FidelityManagementPage from "./pages/FidelityManagementPage"
+import AdminLayout from "./components/AdminLayout"
 
 
 
@@ -39,6 +41,10 @@ function App() {
 
 
           </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+                <Route path="fidelity" element={<FidelityManagementPage />} />
+                {/* Add other admin routes as needed */}
+              </Route>
           <Route path="*" element={<NotFoundPage />} />
           
         </Routes>
